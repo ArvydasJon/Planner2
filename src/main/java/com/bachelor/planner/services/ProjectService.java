@@ -35,4 +35,16 @@ public class ProjectService {
         return null;
     }
 
-}
+    public void updateProject(Project project) {
+        for (int i = 0; i < projects.size(); i++) {
+            Project p = projects.get(i);
+            if (p.getProjectId().equals(project.getProjectId())) {
+                projects.set(i, project);
+                break;
+            }
+        }
+    }
+
+    }
+
+
