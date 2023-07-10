@@ -8,7 +8,6 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-//@RequestMapping("/project")
 
 public class ProjectController {
   private final ProjectService projectService;
@@ -27,12 +26,7 @@ public class ProjectController {
         return "Pavyko";
     }
 
-   /* @PutMapping("/project")
-    public String updateProject(@RequestBody Project project){
-        projectService.updateProject(project);
-        return "Pavyko put";
-    }
-*/
+
     @PutMapping("/project/{projectId}")
     public String updateProject(@PathVariable("projectId") Long projectId, @RequestBody Project project) {
         project.setProjectId(projectId);
