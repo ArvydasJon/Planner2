@@ -23,7 +23,6 @@ public class ProjectController {
       return projectService.listProjects();
     }
 
-
     @PostMapping("/project")
     public String createProject(@RequestBody Project project){
      //  this.project=project;
@@ -34,7 +33,13 @@ public class ProjectController {
     @PutMapping("/project")
     public String putProject(@RequestBody Project project){
        //this.project=project;
-
         return "Pavyko put";
     }
+    @DeleteMapping("/project/{projectId}")
+    public String deleteProject(@PathVariable Long projectId){
+        //  this.project=project;
+        projectService.deleteProject(projectId);
+        return "Pavyko delete";
+    }
+
 }

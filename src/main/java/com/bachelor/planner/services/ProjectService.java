@@ -24,7 +24,7 @@ public class ProjectService {
         projects.add(project);
     }
 
-    public void deleteProduct(Long projectId) {
+    public void deleteProject(Long projectId) {
         projects.removeIf(project -> project.getProjectId().equals(projectId));
     }
 
