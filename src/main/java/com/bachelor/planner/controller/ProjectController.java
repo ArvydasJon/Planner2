@@ -27,11 +27,21 @@ public class ProjectController {
         return "Pavyko";
     }
 
-    @PutMapping("/project")
+   /* @PutMapping("/project")
     public String updateProject(@RequestBody Project project){
         projectService.updateProject(project);
         return "Pavyko put";
     }
+*/
+    @PutMapping("/project/{projectId}")
+    public String updateProject(@PathVariable("projectId") Long projectId, @RequestBody Project project) {
+        project.setProjectId(projectId);
+        projectService.updateProject(project);
+        return "Pavyko put";
+    }
+
+
+
     @DeleteMapping("/project/{projectId}")
     public String deleteProject(@PathVariable Long projectId){
         projectService.deleteProject(projectId);
