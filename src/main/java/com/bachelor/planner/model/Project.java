@@ -1,8 +1,6 @@
 package com.bachelor.planner.model;
 
-
 import java.time.*;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
