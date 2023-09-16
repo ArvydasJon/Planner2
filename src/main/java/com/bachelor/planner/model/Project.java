@@ -25,5 +25,8 @@ public class Project {
     private LocalDate startDate;
     @Column(name = "endDate")
     private LocalDate endDate;
-
+    @Column(name = "monday")
+    private int monday;
+    @Column(name = "tuesday")
+    private int tuesday;
 }

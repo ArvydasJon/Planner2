@@ -5,24 +5,30 @@ import com.bachelor.planner.repository.ProjectRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
+import org.apache.commons.lang3.tuple.Pair;
+
+
 @Service
 @RequiredArgsConstructor
 public class ProjectService {
 
     private final ProjectRepository projectRepository;
+
     public List<Project> listProjects() {
-        List<Project> projects= projectRepository.findAll();
+        List<Project> projects = projectRepository.findAll();
         return projects;
     }
+
     public Project getProjectById(Long id) {
 
         return projectRepository.findById(id).orElse(null);
     }
+
     public void addProject(Project project) {
-    projectRepository.save(project);
+        projectRepository.save(project);
     }
 
     public void updateProject(Project project) {
@@ -33,6 +39,73 @@ public class ProjectService {
         projectRepository.deleteById(projectId);
     }
 
+    public DayOfWeek getWeekDay(Long id) {
+        Project project = projectRepository.findById(id).orElse(null);
+
+        if (project != null && project.getStartDate() != null) {
+            LocalDate startDate = project.getStartDate();
+            // Gauti savaitės dieną
+            return startDate.getDayOfWeek();
+        }
+        return null;
     }
+    public int getWeekDayValue(Long id, LocalDate date) {
+        Project project = projectRepository.findById(id).orElse(null);
+
+        if (project != null ) {
+            int dayValue = 0;
+            DayOfWeek weekday = date.getDayOfWeek();
+            switch (weekday) {
+                case MONDAY -> {
+                    dayValue = project.getMonday();
+                    break;
+                }
+                case TUESDAY -> {
+                    dayValue = project.getTuesday();
+                    break;
+                }
+                case WEDNESDAY -> {
+                }
+                case THURSDAY -> {
+                }
+                case FRIDAY -> {
+                }
+                case SATURDAY -> {
+                }
+                case SUNDAY -> {
+                }
+            }
+
+            return dayValue;
+        }
+        return 0;
+    }
+
+    public Pair<Integer, LocalDate> getWeekDaysValueSum(Long id) {
+        Project project = projectRepository.findById(id).orElse(null);
+        LocalDate startDate = project.getStartDate();
+        LocalDate endDate = project.getEndDate();
+        int duration = project.getProjectDuration();
+        int weekDaysValueSum=0;
+        LocalDate completeDate=null;
+
+
+        if (project != null ) {
+            for(LocalDate date = startDate; !date.isAfter(endDate); date = date.plusDays(1)  ){
+                weekDaysValueSum += getWeekDayValue(id,date);
+                if(weekDaysValueSum>=duration && completeDate==null){
+                    completeDate=date;
+                }
+            }
+            return Pair.of(weekDaysValueSum, completeDate);
+        }
+        return null;
+    }
+
+
+}
+
+
+
 
 
