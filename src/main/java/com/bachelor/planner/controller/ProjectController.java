@@ -1,9 +1,11 @@
 package com.bachelor.planner.controller;
 
+import com.bachelor.planner.dto.WeekDaysValueSumData;
 import com.bachelor.planner.model.Project;
 import com.bachelor.planner.services.ProjectService;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.tuple.Pair;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.DayOfWeek;
@@ -53,9 +55,14 @@ public class ProjectController {
         return  projectService.getWeekDaysValue(projectId);
     } */
 
-    @GetMapping("/weekdaysvaluesum/{projectId}")
+  /*  @GetMapping("/weekdaysvaluesum/{projectId}")  // palikau kaip pavyzdį su Pair
     public Pair<Integer, LocalDate> getWeekDayValueSum(@PathVariable Long projectId){
         return  projectService.getWeekDaysValueSum(projectId);
+    } */
+    @GetMapping("/weekdaysvaluesum/{projectId}")
+    public ResponseEntity<WeekDaysValueSumData> getWeekDaysValueSumWithDate(@PathVariable Long projectId) {
+        WeekDaysValueSumData result = projectService.getWeekDaysValueSumWithDate(projectId);
+        return ResponseEntity.ok(result);
     }
 
 }

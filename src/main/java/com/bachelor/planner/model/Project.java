@@ -29,4 +29,14 @@ public class Project {
     private int monday;
     @Column(name = "tuesday")
     private int tuesday;
+    @Column(name = "wednesday")
+    private int wednesday;
+    @Column(name = "thursday")
+    private int thursday;
+    @Column(name = "friday")
+    private int friday;
+    @Column(name = "saturday")
+    private int saturday;
+    @Column(name = "sunday")
+    private int sunday;
 }
