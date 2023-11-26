@@ -1,5 +1,6 @@
 package com.bachelor.planner.services;
 
+import com.bachelor.planner.exeptions.IdNotFoundExeption;
 import com.bachelor.planner.model.Project;
 import com.bachelor.planner.repository.ProjectRepository;
 import com.bachelor.planner.dto.WeekDaysValueSumData;
@@ -23,10 +24,15 @@ public class ProjectService {
         return projects;
     }
 
-    public Project getProjectById(Long id) {
+   public Project getProjectById(Long id) {
+        if(projectRepository.findById(id).isEmpty())
+           // throw new IdNotFoundExeption("Bla bla");
 
-        return projectRepository.findById(id).orElse(null);
+        throw new IdNotFoundExeption(id);
+        return projectRepository.findById(id).get();
     }
+ //   public Project getProjectById(Long id){return projectRepository.findById(id).get();}
+
 
     public void addProject(Project project) {
         projectRepository.save(project);
@@ -100,7 +106,6 @@ public class ProjectService {
         int duration = project.getProjectDuration();
         int weekDaysValueSum=0;
         LocalDate completeDate=null;
-
 
         if (project != null ) {
             for(LocalDate date = startDate; !date.isAfter(endDate); date = date.plusDays(1)  ){

@@ -1,0 +1,25 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:latest
+ #   restart: no
+    restart: always
+    environment:
+  #    MYSQL_ROOT_PASSWORD: root
+      MYSQL_ALLOW_EMPTY_PASSWORD: "true"
+      MYSQL_DATABASE: planner
+   #   MYSQL_USER: user
+    #  MYSQL_PASSWORD: user
+    ports:
+      - "3306:3306"
+
+  spring-boot-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+
+

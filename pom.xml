@@ -47,6 +47,23 @@
 			<version>3.12.0</version>
 		</dependency>
 
+
+		<!-- https://mvnrepository.com/artifact/io.github.wimdeblauwe/error-handling-spring-boot-starter -->
+		<dependency>
+			<groupId>io.github.wimdeblauwe</groupId>
+			<artifactId>error-handling-spring-boot-starter</artifactId>
+			<version>4.2.0</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>8.0.1.Final</version>
+		</dependency>
+
+
+
 	</dependencies>
 
 	<build>
